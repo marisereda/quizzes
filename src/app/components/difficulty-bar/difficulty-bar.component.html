@@ -1,0 +1,29 @@
+<div>
+  <div *ngFor="let item of difficulties; let i = index">
+    <input
+      type="radio"
+      [id]="item"
+      name="difficulty"
+      [value]="item"
+      [checked]="currentDifficulty === difficulty.value"
+      #difficulty
+      (change)="handleChangeDifficulty(difficulty.value)"
+    />
+    <label [for]="item">{{ item }}</label>
+  </div>
+
+  <!-- <input
+    type="radio"
+    id="easy"
+    name="difficulty"
+    value="easy"
+    checked
+    #difficulty
+    (change)="handleChangeDifficulty(difficulty.value)"
+  />
+  <label for="easy">Easy</label>
+  <input type="radio" id="medium" name="difficulty" value="medium" checked />
+  <label for="medium">Medium</label>
+  <input type="radio" id="hard" name="difficulty" value="hard" checked />
+  <label for="hard">Hard</label> -->
+</div>

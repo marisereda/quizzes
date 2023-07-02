@@ -3,16 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TaskComponent } from './components/task/task.component';
+import { ButtonComponent } from './components/button/button.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from './components/error/error.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { PlayPageComponent } from './pages/play-page/play-page.component';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
+import { RouterModule } from '@angular/router';
+import { DifficultyBarComponent } from './components/difficulty-bar/difficulty-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TaskComponent,
+    ButtonComponent,
+    ErrorComponent,
+    HomePageComponent,
+    PlayPageComponent,
+    QuizCardComponent,
+    DifficultyBarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    RouterModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
