@@ -20,8 +20,6 @@ export class PlayPageComponent implements OnInit {
   corrAnswAmount = 0;
   timeStart: number = Date.now();
   statistics: IQuizResult;
-  // timeEnd: number = Date.now();
-  // timeTotal: number;
   loading = false;
   notFound = false;
   constructor(
@@ -67,15 +65,7 @@ export class PlayPageComponent implements OnInit {
       };
 
       this.statisticsService.setStatistics(this.statistics);
-
-      this.redirectService.redirect(`quiz-results`, {
-        quizId: this.quizId,
-        quizName: this.quizName,
-        difficulty: this.difficulty,
-        questionsAmount: this.currentTaskIndex + 1,
-        corrAnswAmount: this.corrAnswAmount,
-        totalTime: Date.now() - this.timeStart,
-      });
+      this.redirectService.redirect(`quiz-results`, this.statistics);
     }
     console.log('🚧 corrAnswAmount:', this.corrAnswAmount);
   }
