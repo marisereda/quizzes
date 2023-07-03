@@ -12,6 +12,7 @@ import { TasksService } from 'src/app/services/tasks.service';
   templateUrl: './play-page.component.html',
 })
 export class PlayPageComponent implements OnInit {
+  quizIdList: string[];
   quizId: string | null;
   quizName: string;
   difficulty: string | null;
@@ -30,11 +31,22 @@ export class PlayPageComponent implements OnInit {
     public errorService: ErrorService
   ) {}
   ngOnInit(): void {
+    console.log('🚧 history.state:', history.state);
+    this.quizIdList = history.state.quizzes;
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
+
     this.loading = true;
-    if (!this.quizId || !this.difficulty) {
-      this.notFound = true;
+    if (
+      !this.quizId ||
+      !this.difficulty ||
+      !this.quizIdList ||
+      !this.quizIdList.includes(this.quizId) ||
+      this.difficulty !== 'easy' ||
+      'medium' ||
+      'hard'
+    ) {
+      this.redirectService.redirect('404');
       this.loading = false;
       return;
     }

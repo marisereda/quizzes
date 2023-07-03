@@ -1,5 +1,9 @@
-<h1 class="ml-3 text-red-400">{{ title | uppercase }}</h1>
-<p *ngIf="loading">Loading...</p>
-<router-outlet></router-outlet>
 
-<app-error *ngIf="errorService.error$ | async" />
+<main>
+  <app-header />
+  <p *ngIf="loading">Loading...</p>
+  <router-outlet />
+
+  <app-error *ngIf="errorService.error$ | async" />
+</main>
+<app-footer />

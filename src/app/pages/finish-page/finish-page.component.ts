@@ -18,7 +18,6 @@ export class FinishPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(history.state);
     if (!history.state.hasOwnProperty('quizName')) {
       this.redirectService.redirect('');
     }

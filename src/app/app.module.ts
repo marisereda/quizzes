@@ -16,6 +16,9 @@ import { DifficultyBarComponent } from './components/difficulty-bar/difficulty-b
 import { FinishPageComponent } from './pages/finish-page/finish-page.component';
 
 import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { StatisticsPageComponent } from './pages/statistics-page/statistics-page
     DifficultyBarComponent,
     FinishPageComponent,
     StatisticsPageComponent,
+    HeaderComponent,
+    NotFoundPageComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<footer class="flex min-h-[100px] grow bg-neutral-50 py-10">
+  <div class="mx-auto mt-auto max-w-[1200px] px-10">
+    <ul class="flex gap-6">
+      <li *ngFor="let link of links">
+        <a
+          [href]="link.href"
+          target="_blank"
+          class="p-2 text-neutral-400 hover:text-neutral-500"
+        >
+          <span class="sr-only">{{ link.label }}</span>
+          <fa-icon [icon]="link.icon" size="xl" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

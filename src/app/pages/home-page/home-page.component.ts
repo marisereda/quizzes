@@ -33,7 +33,9 @@ export class HomePageComponent implements OnInit {
     });
   }
   handlePlayClick(quizItem: IQuizItem) {
-    this.redirectService.redirect(`quiz/${quizItem.id}/${this.difficulty}`);
+    this.redirectService.redirect(`quiz/${quizItem.id}/${this.difficulty}`, {
+      quizzes: this.quizzes.map((quiz) => quiz.id),
+    });
   }
 
   handleChangeDifficutly(value: string) {
