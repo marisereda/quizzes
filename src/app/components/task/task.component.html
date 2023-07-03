@@ -1,8 +1,10 @@
-<h2 class="text-blue-700">Task</h2>
-<h2>{{ task.category }}</h2>
-<app-button
-  *ngFor="let name of buttonNames; let i = index"
-  [name]="name"
-  (click)="createButtonList()"
->
-</app-button>
+<div class="border-2">
+  <h2>{{ task.category }}</h2>
+  <p>{{ task.question }}</p>
+  <app-button
+    *ngFor="let name of buttonNames; let i = index"
+    [name]="name"
+    (click)="handleClickAnswer(name)"
+  >
+  </app-button>
+</div>

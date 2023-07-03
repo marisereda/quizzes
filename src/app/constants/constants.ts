@@ -1,1 +1,1 @@
-export const tasksAmount = 10;
+export const tasksAmount = 2;

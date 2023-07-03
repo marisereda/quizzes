@@ -1,6 +1,8 @@
 <p>quiz-card works!</p>
 <div class="border-2">
   <p>{{ quizItem.name }}</p>
-  <p>Questions:<span>30</span></p>
+  <p>
+    Questions:<span>{{ tasksAmount }}</span>
+  </p>
   <app-button name="Play" (click)="handlePlayClick(quizItem)"></app-button>
 </div>

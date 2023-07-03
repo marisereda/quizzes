@@ -1,0 +1,31 @@
+<p>Congrats!! You've passed the Quize!!</p>
+<div *ngIf="data">
+  <p>
+    Category: <span>{{ data.quizName }}</span>
+  </p>
+  <p>
+    Difficutlty: <span>{{ data.difficulty }}</span>
+  </p>
+  <p>
+    Score:
+    <span>{{ (data.corrAnswAmount / data.questionsAmount) * 100 }}%</span>
+  </p>
+  <p>
+    Questions: <span>{{ data.questionsAmount }}</span>
+  </p>
+  <p>
+    Correct answers: <span>{{ data.corrAnswAmount }}</span>
+  </p>
+  <p>
+    Incorrect answers:
+    <span>{{ data.questionsAmount - data.corrAnswAmount }}</span>
+  </p>
+  <p>
+    Total time:
+    <span *ngIf="totalTime.hours > 0">{{ totalTime.hours }} hours : </span>
+    <span *ngIf="totalTime.minutes > 0"
+      >{{ totalTime.minutes }} minutes :
+    </span>
+    <span>{{ totalTime.seconds }} seconds</span>
+  </p>
+</div>

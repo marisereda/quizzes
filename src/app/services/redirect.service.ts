@@ -6,7 +6,11 @@ import { Router } from '@angular/router';
 })
 export class RedirectService {
   constructor(private router: Router) {}
-  redirect(url: string) {
-    this.router.navigateByUrl(url);
+  redirect(url: string, state: {} | null = null) {
+    if (!state) {
+      this.router.navigateByUrl(url);
+    } else {
+      this.router.navigateByUrl(url, { state });
+    }
   }
 }

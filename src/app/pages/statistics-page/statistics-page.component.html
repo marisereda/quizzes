@@ -1,0 +1,31 @@
+<p>statistics-page works!</p>
+<div *ngIf="this.statistics.length === 0">
+  <p>Oops!!You don't have any results from the quiz yet.</p>
+  <a href="">Try a quiz</a>
+</div>
+<div *ngIf="this.statistics.length > 0">
+  <p>
+    Quizzes: <span>{{ calculatedResult.totalQuizzes }}</span>
+  </p>
+  <p>
+    Avarage time:
+    <span *ngIf="calculatedResult.averageTime.hours > 0"
+      >{{ calculatedResult.averageTime.hours }} hours :
+    </span>
+    <span *ngIf="calculatedResult.averageTime.minutes > 0"
+      >{{ calculatedResult.averageTime.minutes }} minutes :
+    </span>
+    <span>{{ calculatedResult.averageTime.seconds }} seconds</span>
+  </p>
+  <p>
+    Questions:
+    <span>{{ calculatedResult.totalQuestions }}</span>
+  </p>
+  <p>
+    Correct answers: <span>{{ calculatedResult.totalCorrAnswers }}</span>
+  </p>
+  <p>
+    Incorrect answers:
+    <span>{{ calculatedResult.totalIncorrAnswers }}</span>
+  </p>
+</div>

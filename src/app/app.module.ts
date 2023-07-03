@@ -13,6 +13,9 @@ import { PlayPageComponent } from './pages/play-page/play-page.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { RouterModule } from '@angular/router';
 import { DifficultyBarComponent } from './components/difficulty-bar/difficulty-bar.component';
+import { FinishPageComponent } from './pages/finish-page/finish-page.component';
+
+import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { DifficultyBarComponent } from './components/difficulty-bar/difficulty-b
     PlayPageComponent,
     QuizCardComponent,
     DifficultyBarComponent,
+    FinishPageComponent,
+    StatisticsPageComponent,
   ],
   imports: [
     BrowserModule,

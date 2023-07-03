@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ITask } from './models/task';
 import { TasksService } from './services/tasks.service';
 import { ErrorService } from './services/error.service';
+import { IQuizResult } from './models/quiz-result';
 // import { tasks as data } from './data/tasks';
 
 @Component({
@@ -11,7 +12,6 @@ import { ErrorService } from './services/error.service';
 export class AppComponent implements OnInit {
   title = 'quizzes';
 
-  // tasks: ITask[] = [];
   loading = false;
 
   constructor(
@@ -19,11 +19,5 @@ export class AppComponent implements OnInit {
     public errorService: ErrorService
   ) {}
 
-  ngOnInit(): void {
-    // this.loading = true;
-    // this.tasksService.getTasks().subscribe((quiz) => {
-    //   this.loading = false;
-    //   this.tasks = quiz.results;
-    // });
-  }
+  ngOnInit(): void {}
 }

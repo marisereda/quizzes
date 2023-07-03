@@ -8,3 +8,7 @@
   [quizItem]="quizItem"
   (newCardEvent)="handlePlayClick($event)"
 ></app-quiz-card>
+<app-button
+  name="I'm lucky!"
+  (click)="handlePlayClick(quizzes[randomIndex])"
+></app-button>

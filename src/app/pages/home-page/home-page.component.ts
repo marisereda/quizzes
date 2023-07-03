@@ -12,6 +12,7 @@ import { shuffle } from 'lodash';
 export class HomePageComponent implements OnInit {
   quizzes: IQuizItem[] = [];
   difficulty: string = 'easy';
+  randomIndex = Math.floor(Math.random() * 10);
   loading = false;
   constructor(
     private quizzesService: QuizzesService,
@@ -21,6 +22,8 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('🚧 randomIndex:', this.randomIndex);
+
     this.loading = true;
     this.quizzesService.getQuizzes().subscribe((quizList) => {
       this.loading = false;

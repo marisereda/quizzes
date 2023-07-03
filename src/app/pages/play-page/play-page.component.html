@@ -1,2 +1,7 @@
 <p>play-page works!</p>
-<app-task *ngFor="let task of tasks" [task]="task"></app-task>
+<!-- <app-task *ngFor="let task of tasks" [task]="task"></app-task> -->
+<app-task
+  *ngIf="tasks.length > 0"
+  [task]="tasks[currentTaskIndex]"
+  (newTaskEvent)="handleClickAnswer($event)"
+></app-task>
