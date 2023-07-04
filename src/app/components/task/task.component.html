@@ -1,8 +1,7 @@
 <div class="border-2">
-  <h2>{{ task.category }}</h2>
   <p>{{ task.question }}</p>
   <app-button
-    *ngFor="let name of buttonNames; let i = index"
+    *ngFor="let name of buttonNames"
     [name]="name"
     (click)="handleClickAnswer(name)"
   >

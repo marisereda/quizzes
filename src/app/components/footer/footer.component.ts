@@ -3,7 +3,6 @@ import {
   faGithub,
   faTelegram,
   faLinkedin,
-  faGg,
 } from '@fortawesome/free-brands-svg-icons';
 
 @Component({

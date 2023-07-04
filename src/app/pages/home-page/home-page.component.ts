@@ -14,16 +14,14 @@ export class HomePageComponent implements OnInit {
   difficulty: string = 'easy';
   randomIndex = Math.floor(Math.random() * 10);
   loading = false;
+
   constructor(
     private quizzesService: QuizzesService,
     private redirectService: RedirectService,
-
     public errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
-    console.log('🚧 randomIndex:', this.randomIndex);
-
     this.loading = true;
     this.quizzesService.getQuizzes().subscribe((quizList) => {
       this.loading = false;
@@ -32,12 +30,13 @@ export class HomePageComponent implements OnInit {
       this.quizzes = this.quizzes.slice(0, 10);
     });
   }
+
+  // ----------------------------------------------------------------
   handlePlayClick(quizItem: IQuizItem) {
-    this.redirectService.redirect(`quiz/${quizItem.id}/${this.difficulty}`, {
-      quizzes: this.quizzes.map((quiz) => quiz.id),
-    });
+    this.redirectService.redirect(`quiz/${quizItem.id}/${this.difficulty}`);
   }
 
+  // ----------------------------------------------------------------
   handleChangeDifficutly(value: string) {
     this.difficulty = value;
   }

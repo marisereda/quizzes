@@ -16,6 +16,7 @@ import { tasksAmount } from '../constants/constants';
 export class TasksService {
   constructor(private http: HttpClient, private errorService: ErrorService) {}
 
+  // ----------------------------------------------------------------
   getTasks(quizId: string, difficulty: string): Observable<IQuiz> {
     return this.http
       .get<IQuiz>('https://opentdb.com/api.php', {
@@ -28,6 +29,8 @@ export class TasksService {
       })
       .pipe(catchError(this.ErrorHandler.bind(this)));
   }
+
+  // ----------------------------------------------------------------
   private ErrorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.message);
     return throwError(() => error.message || error);

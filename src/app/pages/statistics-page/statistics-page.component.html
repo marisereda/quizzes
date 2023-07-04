@@ -1,10 +1,10 @@
-<p>statistics-page works!</p>
 <div *ngIf="this.statistics.length === 0">
   <p>Oops!!You don't have any results from the quiz yet.</p>
   <router-outlet>
     <a routerLink="">Try a quiz</a>
   </router-outlet>
 </div>
+
 <div *ngIf="this.statistics.length > 0">
   <p>
     Quizzes: <span>{{ calculatedResult.totalQuizzes }}</span>

@@ -27,11 +27,6 @@ export class TaskComponent implements OnInit {
     this.createButtonList();
   }
 
-  // ngOnChange(changes: SimpleChanges) {
-  //   console.log('CHANGES:', changes);
-  //   this.createButtonList();
-  // }
-
   ngDoCheck() {
     if (this.prevTask !== this.task) {
       this.createButtonList();

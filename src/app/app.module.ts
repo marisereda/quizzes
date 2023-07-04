@@ -19,6 +19,7 @@ import { StatisticsPageComponent } from './pages/statistics-page/statistics-page
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     NotFoundPageComponent,
     FooterComponent,
+    ProgressBarComponent,
   ],
   imports: [
     BrowserModule,

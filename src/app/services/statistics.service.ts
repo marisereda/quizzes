@@ -18,6 +18,7 @@ export class StatisticsService {
   );
   constructor() {}
 
+  // ----------------------------------------------------------------
   getStatistics() {
     const savedStatistics = localStorage.getItem('statistics') ?? '';
     let parsedStatistics: IQuizResult[];
@@ -31,6 +32,7 @@ export class StatisticsService {
     return parsedStatistics;
   }
 
+  // ----------------------------------------------------------------
   setStatistics(stat: IQuizResult) {
     let statistics = this.getStatistics();
     statistics.push(stat);

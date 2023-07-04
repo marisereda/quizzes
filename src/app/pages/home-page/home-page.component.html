@@ -2,13 +2,11 @@
 <app-difficulty-bar
   [currentDifficulty]="difficulty"
   (newBarEvent)="handleChangeDifficutly($event)"
-></app-difficulty-bar>
+/>
+<p *ngIf="loading">Loading...</p>
 <app-quiz-card
   *ngFor="let quizItem of quizzes"
   [quizItem]="quizItem"
   (newCardEvent)="handlePlayClick($event)"
-></app-quiz-card>
-<app-button
-  name="I'm lucky!"
-  (click)="handlePlayClick(quizzes[randomIndex])"
-></app-button>
+/>
+<app-button name="I'm lucky!" (click)="handlePlayClick(quizzes[randomIndex])" />

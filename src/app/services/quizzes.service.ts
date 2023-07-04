@@ -10,11 +10,14 @@ import { IQuizzesList } from '../models/quizzes';
 export class QuizzesService {
   constructor(private http: HttpClient, private errorService: ErrorService) {}
 
+  // ----------------------------------------------------------------
   getQuizzes(): Observable<IQuizzesList> {
     return this.http
       .get<IQuizzesList>('https://opentdb.com/api_category.php')
       .pipe(catchError(this.ErrorHandler.bind(this)));
   }
+
+  // ----------------------------------------------------------------
   private ErrorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.message);
     return throwError(() => error.message || error);

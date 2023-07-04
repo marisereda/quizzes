@@ -36,30 +36,33 @@ export class PlayPageComponent implements OnInit {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
 
-    this.loading = true;
-    if (
-      !this.quizId ||
-      !this.difficulty ||
-      !this.quizIdList ||
-      !this.quizIdList.includes(this.quizId) ||
-      this.difficulty !== 'easy' ||
-      'medium' ||
-      'hard'
-    ) {
+    // console.log('🚧 this.quizId:', this.quizId);
+    // console.log('🚧 this.difficulty:', this.difficulty);
+    // console.log('🚧 this.quizIdList:', this.quizIdList);
+    // console.log('🚧 this.difficulty:', this.difficulty);
+    // console.log('🚧 typeof this.quizId:', typeof this.quizId);
+
+    if (!this.quizId || !this.difficulty) {
       this.redirectService.redirect('404');
       this.loading = false;
       return;
     }
+    this.loading = true;
     this.tasksService
       .getTasks(this.quizId, this.difficulty)
       .subscribe((quiz) => {
         this.loading = false;
         this.tasks = quiz.results;
+        console.log('🚧 this.tasks!!!!:', this.tasks);
+        if (this.tasks.length === 0) {
+          this.redirectService.redirect('404');
+          return;
+        }
         this.quizName = this.tasks[0].category;
-        console.log('🚧 this.tasks:', this.tasks[this.currentTaskIndex]);
+        // console.log('🚧 this.tasks:', this.tasks[this.currentTaskIndex]);
       });
   }
-
+  // ----------------------------------------------------------------
   handleClickAnswer(isCorrect: boolean): void {
     if (isCorrect) {
       this.corrAnswAmount += 1;

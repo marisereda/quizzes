@@ -1,7 +1,13 @@
 <p>play-page works!</p>
-<!-- <app-task *ngFor="let task of tasks" [task]="task"></app-task> -->
+<p *ngIf="loading">Loading...</p>
+<app-progress-bar
+  [quizName]="quizName"
+  [difficulty]="difficulty"
+  [currentTaskIndex]="currentTaskIndex"
+  [tasksAmount]="tasks.length"
+/>
 <app-task
   *ngIf="tasks.length > 0"
   [task]="tasks[currentTaskIndex]"
   (newTaskEvent)="handleClickAnswer($event)"
-></app-task>
+/>
