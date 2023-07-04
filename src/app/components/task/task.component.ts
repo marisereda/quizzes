@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITask } from 'src/app/models/task';
 
 import { shuffle } from 'lodash';
@@ -18,8 +11,10 @@ export class TaskComponent implements OnInit {
   @Input() task: ITask;
   @Output() newTaskEvent = new EventEmitter<boolean>();
   prevTask: ITask;
+  isAnswered: boolean = false;
+  selectedAnswer: string = '';
 
-  buttonNames: string[] = [];
+  answers: string[] = [];
   constructor() {}
 
   ngOnInit(): void {
@@ -38,13 +33,20 @@ export class TaskComponent implements OnInit {
   createButtonList() {
     console.log('🚧 correct answer:', this.task.correct_answer);
 
-    this.buttonNames = this.task.incorrect_answers;
-    this.buttonNames.push(this.task.correct_answer);
-    this.buttonNames = shuffle(this.buttonNames);
+    this.answers = this.task.incorrect_answers;
+    this.answers.push(this.task.correct_answer);
+    this.answers = shuffle(this.answers);
   }
 
   //----------------------------------------------------------------
-  handleClickAnswer(name: string) {
-    this.newTaskEvent.emit(name === this.task.correct_answer);
+  handleClickAnswer(answer: string) {
+    console.log('🚧 CLICK!!!:');
+    this.isAnswered = true;
+    this.selectedAnswer = answer;
+
+    setTimeout(() => {
+      this.newTaskEvent.emit(answer === this.task.correct_answer);
+      this.isAnswered = false;
+    }, 100000);
   }
 }

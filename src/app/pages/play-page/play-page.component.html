@@ -1,13 +1,14 @@
-<p>play-page works!</p>
-<p *ngIf="loading">Loading...</p>
-<app-progress-bar
-  [quizName]="quizName"
-  [difficulty]="difficulty"
-  [currentTaskIndex]="currentTaskIndex"
-  [tasksAmount]="tasks.length"
-/>
-<app-task
-  *ngIf="tasks.length > 0"
-  [task]="tasks[currentTaskIndex]"
-  (newTaskEvent)="handleClickAnswer($event)"
-/>
+<div class="flex-col gap-10 overflow-hidden rounded-[20px] bg-white shadow-lg">
+  <p *ngIf="loading">Loading...</p>
+  <app-progress-bar
+    [quizName]="quizName"
+    [difficulty]="difficulty"
+    [currentTaskIndex]="currentTaskIndex"
+    [tasksAmount]="tasks.length"
+  />
+  <app-task
+    *ngIf="tasks.length > 0"
+    [task]="tasks[currentTaskIndex]"
+    (newTaskEvent)="handleClickAnswer($event)"
+  />
+</div>

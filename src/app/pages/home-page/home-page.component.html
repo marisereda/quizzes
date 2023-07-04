@@ -1,12 +1,22 @@
-<p>home-page works!</p>
-<app-difficulty-bar
-  [currentDifficulty]="difficulty"
-  (newBarEvent)="handleChangeDifficutly($event)"
-/>
-<p *ngIf="loading">Loading...</p>
-<app-quiz-card
-  *ngFor="let quizItem of quizzes"
-  [quizItem]="quizItem"
-  (newCardEvent)="handlePlayClick($event)"
-/>
-<app-button name="I'm lucky!" (click)="handlePlayClick(quizzes[randomIndex])" />
+<div
+  class="flex flex-col gap-10 rounded-[20px] bg-white px-4 pb-10 shadow-lg md:px-8 lg:px-12"
+>
+  <app-difficulty-bar
+    [currentDifficulty]="difficulty"
+    (newBarEvent)="handleChangeDifficutly($event)"
+  />
+  <p *ngIf="loading">Loading...</p>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
+    <app-quiz-card
+      *ngFor="let quizItem of quizzes; let i = index"
+      [quizItem]="quizItem"
+      [color]="getColor(i)"
+      (newCardEvent)="handlePlayClick($event)"
+    />
+  </div>
+  <app-button
+    class="sm:mx-auto sm:w-1/2"
+    name="I'm lucky!"
+    (click)="handlePlayClick(quizzes[randomIndex])"
+  />
+</div>

@@ -9,6 +9,7 @@ import { tasksAmount } from 'src/app/constants/constants';
 })
 export class QuizCardComponent {
   @Input() quizItem: IQuizItem;
+  @Input() color: 'darkBlue' | 'blue' | 'yellow';
   @Output() newCardEvent = new EventEmitter<IQuizItem>();
   tasksAmount: number = tasksAmount;
 

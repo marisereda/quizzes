@@ -1,9 +1,8 @@
-
-<main>
-  <app-header />
-  <p *ngIf="loading">Loading...</p>
-  <router-outlet />
-
-  <app-error *ngIf="errorService.error$ | async" />
+<app-header />
+<main class="-translate-y-[200px]">
+  <div class="container">
+    <router-outlet />
+  </div>
 </main>
-<app-footer />
+<app-error *ngIf="errorService.error$ | async" />
+<app-footer class="absolute bottom-0 left-0 right-0" />

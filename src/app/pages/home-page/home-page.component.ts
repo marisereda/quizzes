@@ -40,4 +40,12 @@ export class HomePageComponent implements OnInit {
   handleChangeDifficutly(value: string) {
     this.difficulty = value;
   }
+
+  // ----------------------------------------------------------------
+  getColor(index: number) {
+    return ['yellow', 'darkBlue', 'blue'][index % 3] as
+      | 'darkBlue'
+      | 'blue'
+      | 'yellow';
+  }
 }

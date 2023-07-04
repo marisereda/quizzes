@@ -10,10 +10,6 @@ import { IQuizResult } from './models/quiz-result';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = 'quizzes';
-
-  loading = false;
-
   constructor(
     private tasksService: TasksService,
     public errorService: ErrorService

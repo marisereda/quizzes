@@ -1,3 +1,15 @@
-<button class="border-2">
+<button
+  class="w-full rounded-[40px] px-6 py-4 text-xl font-bold text-sky-950 shadow-md transition active:translate-y-px disabled:pointer-events-none disabled:active:translate-y-0 md:px-8 md:py-6 md:text-2xl"
+  [ngClass]="{
+    'bg-amber-400 hover:bg-amber-500 ': color === 'yellow',
+    'bg-white hover:bg-gray-100': color === 'white',
+    'bg-red-500 hover:bg-red-600': color === 'red',
+    'bg-green-500 hover:bg-green-600': color === 'green',
+    'brightness-50': shaded,
+
+  }"
+  [disabled]="disabled"
+  (click)="handleClick()"
+>
   {{ name }}
 </button>
