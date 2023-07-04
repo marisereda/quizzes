@@ -47,6 +47,6 @@ export class TaskComponent implements OnInit {
     setTimeout(() => {
       this.newTaskEvent.emit(answer === this.task.correct_answer);
       this.isAnswered = false;
-    }, 100000);
+    }, 5000);
   }
 }
