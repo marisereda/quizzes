@@ -15,12 +15,13 @@
       class="flex flex-col gap-4 text-right text-lg font-bold sm:text-xl md:gap-6 md:text-2xl"
     >
       <p *ngFor="let title of titlesList">{{ title }}</p>
+      <p>Total time:</p>
     </div>
 
     <div
-      class="flex flex-col justify-between text-lg font-bold text-amber-600 sm:text-xl md:text-2xl"
+      class="flex flex-col justify-between gap-4 text-lg font-bold text-amber-600 sm:text-xl md:text-2xl"
     >
-      <p *ngFor="let value of valuesList">{{ value }}</p>
+      <p *ngFor="let value of valuesList">{{ value | titlecase }}</p>
       <p>
         <span *ngIf="totalTime.hours > 0">{{ totalTime.hours }} hours : </span>
         <span *ngIf="totalTime.minutes > 0"
