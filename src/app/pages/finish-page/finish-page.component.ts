@@ -10,7 +10,6 @@ import { RedirectService } from 'src/app/services/redirect.service';
 })
 export class FinishPageComponent implements OnInit {
   data: IQuizResult;
-  totalTime: { hours: number; minutes: number; seconds: number };
   resultsList = {
     'Category:': '',
     'Difficulty:': '',
@@ -18,6 +17,7 @@ export class FinishPageComponent implements OnInit {
     'Questions:': '',
     'Correct answers:': '',
     'Incorrect answers:': '',
+    'Total time:': '',
   };
   titlesList: string[];
   valuesList: string[];
@@ -33,7 +33,6 @@ export class FinishPageComponent implements OnInit {
       this.redirectService.redirect('');
     }
     this.data = history.state;
-    this.totalTime = this.formatService.formatTime(this.data.totalTime);
     this.resultsList = {
       'Category:': this.data.quizName,
       'Difficulty:': this.data.difficulty ?? '',
@@ -45,6 +44,7 @@ export class FinishPageComponent implements OnInit {
       'Incorrect answers:': (
         this.data.questionsAmount - this.data.corrAnswAmount
       ).toString(),
+      'Total time:': this.formatService.formatTime(this.data.totalTime),
     };
     this.titlesList = Object.keys(this.resultsList);
     this.valuesList = Object.values(this.resultsList);

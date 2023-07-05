@@ -1,33 +1,42 @@
-<div *ngIf="this.statistics.length === 0">
-  <p>Oops!!You don't have any results from the quiz yet.</p>
-  <router-outlet>
-    <a routerLink="">Try a quiz</a>
-  </router-outlet>
-</div>
+<div class="overflow-hidden rounded-[20px] bg-neutral-50 shadow-lg">
+  <div
+    class="flex min-h-[200px] items-center justify-center px-4 md:px-8 lg:px-12"
+  >
+    <p class="text-3xl font-bold text-center text-cyan-600 md:text-4xl">
+      Look at your Stats!
+    </p>
+  </div>
 
-<div *ngIf="this.statistics.length > 0">
-  <p>
-    Quizzes: <span>{{ calculatedResult.totalQuizzes }}</span>
-  </p>
-  <p>
-    Average time:
-    <span *ngIf="calculatedResult.averageTime.hours > 0"
-      >{{ calculatedResult.averageTime.hours }} hours :
-    </span>
-    <span *ngIf="calculatedResult.averageTime.minutes > 0"
-      >{{ calculatedResult.averageTime.minutes }} minutes :
-    </span>
-    <span>{{ calculatedResult.averageTime.seconds }} seconds</span>
-  </p>
-  <p>
-    Questions:
-    <span>{{ calculatedResult.totalQuestions }}</span>
-  </p>
-  <p>
-    Correct answers: <span>{{ calculatedResult.totalCorrAnswers }}</span>
-  </p>
-  <p>
-    Incorrect answers:
-    <span>{{ calculatedResult.totalIncorrAnswers }}</span>
-  </p>
+  <div
+    *ngIf="this.statistics.length === 0"
+    class="flex flex-col items-center gap-8 px-6 py-10 bg-cyan-200 md:gap-12 md:px-8 md:py-14"
+  >
+    <p class="font-bold text-center sm:text-xl md:text-2xl">
+      Oops!! You haven't yet got any quiz results.
+    </p>
+
+    <a
+      routerLink=""
+      class="w-full rounded-[40px] bg-amber-400 px-6 py-4 text-center text-xl font-bold text-sky-950 shadow-md transition hover:bg-amber-500 active:translate-y-px sm:mx-auto sm:w-1/2 md:px-8 md:py-6 md:text-2xl"
+      >Try a quiz!</a
+    >
+  </div>
+
+  <div
+    *ngIf="this.statistics.length > 0"
+    class="flex flex-col gap-8 px-6 py-10 font-bold bg-cyan-200 sm:text-xl md:gap-16 md:px-8 md:py-14 md:text-2xl lg:px-12"
+  >
+    <div class="flex flex-col justify-between gap-8 md:flex-row md:gap-12">
+      <div
+        *ngFor="let data of renderData"
+        class="flex flex-col items-center gap-0"
+      >
+        <p>{{ data[0] }}</p>
+        <p class="text-5xl font-bold text-amber-600 sm:text-6xl md:text-7xl">
+          {{ data[1] }}
+        </p>
+      </div>
+    </div>
+    <app-pie-chart [data]="chartData" />
+  </div>
 </div>

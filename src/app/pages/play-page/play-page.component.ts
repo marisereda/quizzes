@@ -31,8 +31,8 @@ export class PlayPageComponent implements OnInit {
     public errorService: ErrorService
   ) {}
   ngOnInit(): void {
-    console.log('🚧 history.state:', history.state);
-    this.quizIdList = history.state.quizzes;
+    // console.log('🚧 history.state:', history.state);
+    // this.quizIdList = history.state.quizzes;
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
 

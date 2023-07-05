@@ -9,13 +9,16 @@ import { StatisticsService } from 'src/app/services/statistics.service';
 })
 export class StatisticsPageComponent implements OnInit {
   statistics: IQuizResult[];
-  calculatedResult = {
-    totalQuizzes: 0,
-    totalTime: 0,
-    averageTime: { hours: 0, minutes: 0, seconds: 0 },
-    totalQuestions: 0,
-    totalCorrAnswers: 0,
-    totalIncorrAnswers: 0,
+  totalTime = 0;
+  showData = {
+    'Quizzes:': 0,
+    'Average time:': '',
+    'Questions:': 0,
+  };
+  renderData: [string, string | number][];
+  chartData = {
+    'Correct Answers': 0,
+    'Incorrect Answers': 0,
   };
 
   constructor(
@@ -29,17 +32,18 @@ export class StatisticsPageComponent implements OnInit {
 
     if (this.statistics.length > 0) {
       this.statistics.forEach((result) => {
-        this.calculatedResult.totalQuizzes += 1;
-        this.calculatedResult.totalTime += result.totalTime;
-        this.calculatedResult.totalQuestions += result.questionsAmount;
-        this.calculatedResult.totalCorrAnswers += result.corrAnswAmount;
+        this.totalTime += result.totalTime;
+        this.showData['Quizzes:'] += 1;
+        this.showData['Questions:'] += result.questionsAmount;
+        this.showData['Average time:'] = this.formatService.formatTime(
+          this.totalTime / this.showData['Quizzes:']
+        );
+        this.chartData['Correct Answers'] += result.corrAnswAmount;
       });
-      this.calculatedResult.averageTime = this.formatService.formatTime(
-        this.calculatedResult.totalTime / this.calculatedResult.totalQuizzes
-      );
-      this.calculatedResult.totalIncorrAnswers =
-        this.calculatedResult.totalQuestions -
-        this.calculatedResult.totalCorrAnswers;
+      this.chartData['Incorrect Answers'] =
+        this.showData['Questions:'] - this.chartData['Correct Answers'];
     }
+
+    this.renderData = Object.entries(this.showData);
   }
 }

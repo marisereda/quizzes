@@ -20,6 +20,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     NotFoundPageComponent,
     FooterComponent,
     ProgressBarComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     FontAwesomeModule,
     RouterModule,
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

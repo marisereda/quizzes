@@ -1,9 +1,9 @@
-<div class="overflow-hidden rounded-[20px] bg-white shadow-lg">
+<div class="overflow-hidden rounded-[20px] bg-neutral-50 shadow-lg">
   <div
     class="flex min-h-[200px] items-center justify-center px-4 md:px-8 lg:px-12"
   >
     <p class="text-center text-3xl font-bold text-cyan-600 md:text-4xl">
-      Congrats!! You've passed the quize!!
+      Congrats!! You've passed the quiz!!
     </p>
   </div>
 
@@ -15,20 +15,12 @@
       class="flex flex-col gap-4 text-right text-lg font-bold sm:text-xl md:gap-6 md:text-2xl"
     >
       <p *ngFor="let title of titlesList">{{ title }}</p>
-      <p>Total time:</p>
     </div>
 
     <div
       class="flex flex-col justify-between gap-4 text-lg font-bold text-amber-600 sm:text-xl md:text-2xl"
     >
       <p *ngFor="let value of valuesList">{{ value | titlecase }}</p>
-      <p>
-        <span *ngIf="totalTime.hours > 0">{{ totalTime.hours }} hours : </span>
-        <span *ngIf="totalTime.minutes > 0"
-          >{{ totalTime.minutes }} minutes :
-        </span>
-        <span>{{ totalTime.seconds }} seconds</span>
-      </p>
     </div>
   </div>
 </div>

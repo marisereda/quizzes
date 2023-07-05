@@ -1,10 +1,24 @@
 <header
-  class="relative min-h-[300px] bg-cyan-600 pb-10 pt-10 text-white md:min-h-[400px] md:pt-14"
+  class="relative min-h-[300px] bg-cyan-600 pb-10 pt-10 md:min-h-[400px] md:pt-14"
 >
-  <div
-    class="container flex justify-center gap-10 text-lg font-bold md:text-2xl"
-  >
-    <a routerLink="">Home</a>
-    <a routerLink="statistics">Statistics</a>
-  </div>
+  <nav class="container text-lg font-bold md:text-2xl">
+    <ul class="flex justify-center gap-10">
+      <li *ngFor="let link of links">
+        <a
+          [routerLink]="link[1]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          #rla="routerLinkActive"
+          after=""
+          class="relative text-white after:absolute after:bottom-0 after:left-0 after:translate-y-2 after:duration-300"
+          [ngClass]="{
+            'after:right-0 after:h-1  after:rounded-full after:bg-white after:text-sm after:text-white after:transition':
+              rla.isActive,
+
+          }"
+          >{{ link[0] }}</a
+        >
+      </li>
+    </ul>
+  </nav>
 </header>
