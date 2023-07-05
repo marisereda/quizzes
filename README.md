@@ -1,27 +1,36 @@
 # Quizzes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+## Description
 
-## Development server
+The project "Quizzes" is a quiz app that provides 10 random quizzes. The user may make their own choices themselves or let the app make the choices instead.
+Once the quiz is completed,the results are displayed. There is also an option to view overall statistics at any time, which shows the total number of quizzes taken, the average time to complete the quiz, the total number of questions answered, and how many answers were correct.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technology stack
 
-## Code scaffolding
+- Angular
+- Tailwind
+- [ExchangeRate-API](https://opentdb.com/api_config.php)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Live application
 
-## Build
+[Currency converter](https://sensational-fox-9b9cbf.netlify.app/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Run locally
 
-## Running unit tests
+Clone the project
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+  git clone https://github.com/marisereda/quizzes.git
+```
 
-## Running end-to-end tests
+Install dependencies
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+  npm install
+```
 
-## Further help
+Start the development server
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+  npm start
+```
