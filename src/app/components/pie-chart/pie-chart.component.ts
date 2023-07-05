@@ -6,7 +6,7 @@ import Chart from 'chart.js/auto';
   templateUrl: './pie-chart.component.html',
 })
 export class PieChartComponent implements OnInit {
-  public chart: any;
+  public chart: Chart<'pie'>;
   @Input() data: { [key: string]: number };
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class PieChartComponent implements OnInit {
           {
             label: '',
             data: Object.values(this.data),
-            backgroundColor: ['green', 'red'],
+            backgroundColor: ['#22c55e', '#ef4444'],
             hoverOffset: 4,
           },
         ],

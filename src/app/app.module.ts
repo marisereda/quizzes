@@ -24,6 +24,7 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { DecimalPipe } from '@angular/common';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { DecodePipe } from './pipes/decode.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { LogoComponent } from './components/logo/logo.component';
     PieChartComponent,
     SpinnerComponent,
     LogoComponent,
+    DecodePipe,
   ],
   imports: [
     BrowserModule,

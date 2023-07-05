@@ -1,11 +1,11 @@
 <div
   class="flex flex-col justify-between gap-10 bg-cyan-200 px-4 py-10 md:px-8 md:py-12 lg:px-12"
 >
-  <p class="text-center text-2xl md:text-3xl">{{ task.question }}</p>
+  <p class="text-center text-2xl md:text-3xl">{{ task.question | decode }}</p>
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <app-button
       *ngFor="let answer of answers"
-      [name]="answer"
+      [name]="answer | decode"
       [color]="
         isAnswered
           ? answer === task.correct_answer

@@ -1,21 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ITask } from 'src/app/models/task';
 
 import { shuffle } from 'lodash';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, DoCheck {
   @Input() task: ITask;
   @Output() newTaskEvent = new EventEmitter<boolean>();
   prevTask: ITask;
-  isAnswered: boolean = false;
-  selectedAnswer: string = '';
+  isAnswered = false;
+  selectedAnswer = '';
 
   answers: string[] = [];
-  constructor() {}
 
   ngOnInit(): void {
     this.prevTask = this.task;
@@ -31,8 +38,6 @@ export class TaskComponent implements OnInit {
 
   //----------------------------------------------------------------
   createButtonList() {
-    console.log('🚧 correct answer:', this.task.correct_answer);
-
     this.answers = this.task.incorrect_answers;
     this.answers.push(this.task.correct_answer);
     this.answers = shuffle(this.answers);
@@ -46,6 +51,6 @@ export class TaskComponent implements OnInit {
     setTimeout(() => {
       this.newTaskEvent.emit(answer === this.task.correct_answer);
       this.isAnswered = false;
-    }, 2000);
+    }, Constants.taskTimeout);
   }
 }

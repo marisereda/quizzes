@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IQuizItem } from 'src/app/models/quizzes';
 import { ErrorService } from 'src/app/services/error.service';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { RedirectService } from 'src/app/services/redirect.service';
-import { shuffle } from 'lodash';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   quizzes: IQuizItem[] = [];
-  difficulty: string = 'easy';
+  quizzesSubscription: Subscription;
+  difficulty = 'easy';
   randomIndex = Math.floor(Math.random() * 10);
-  loading = false;
+  loading = true;
 
   constructor(
     private quizzesService: QuizzesService,
@@ -22,13 +23,16 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.quizzesService.getQuizzes().subscribe((quizList) => {
-      this.loading = false;
-      this.quizzes = quizList.trivia_categories;
-      this.quizzes = shuffle(this.quizzes);
-      this.quizzes = this.quizzes.slice(0, 10);
-    });
+    this.quizzesSubscription = this.quizzesService
+      .getQuizzes()
+      .subscribe((quizzes) => {
+        this.loading = false;
+        this.quizzes = quizzes;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.quizzesSubscription.unsubscribe();
   }
 
   // ----------------------------------------------------------------

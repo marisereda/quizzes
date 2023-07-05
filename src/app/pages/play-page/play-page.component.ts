@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IQuizResult } from 'src/app/models/quiz-result';
 import { ITask } from 'src/app/models/task';
 import { ErrorService } from 'src/app/services/error.service';
+import { QuizzesService } from 'src/app/services/quizzes.service';
 import { RedirectService } from 'src/app/services/redirect.service';
 import { StatisticsService } from 'src/app/services/statistics.service';
-import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
   selector: 'app-play-page',
   templateUrl: './play-page.component.html',
 })
-export class PlayPageComponent implements OnInit {
+export class PlayPageComponent implements OnInit, OnDestroy {
+  quizzesSubscription: Subscription;
   quizIdList: string[];
   quizId: string | null;
   quizName: string;
@@ -21,15 +23,17 @@ export class PlayPageComponent implements OnInit {
   corrAnswAmount = 0;
   timeStart: number = Date.now();
   statistics: IQuizResult;
-  loading = false;
+  loading = true;
   notFound = false;
   constructor(
-    private tasksService: TasksService,
+    private quizzesService: QuizzesService,
     private route: ActivatedRoute,
     private redirectService: RedirectService,
     private statisticsService: StatisticsService,
     public errorService: ErrorService
   ) {}
+
+  // ----------------------------------------------------------------
   ngOnInit(): void {
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
@@ -39,12 +43,12 @@ export class PlayPageComponent implements OnInit {
       this.loading = false;
       return;
     }
-    this.loading = true;
-    this.tasksService
+
+    this.quizzesSubscription = this.quizzesService
       .getTasks(this.quizId, this.difficulty)
-      .subscribe((quiz) => {
+      .subscribe((tasks) => {
         this.loading = false;
-        this.tasks = quiz.results;
+        this.tasks = tasks;
 
         if (this.tasks.length === 0) {
           this.redirectService.redirect('404');
@@ -53,6 +57,12 @@ export class PlayPageComponent implements OnInit {
         this.quizName = this.tasks[0].category;
       });
   }
+
+  // ----------------------------------------------------------------
+  ngOnDestroy(): void {
+    this.quizzesSubscription.unsubscribe();
+  }
+
   // ----------------------------------------------------------------
   handleClickAnswer(isCorrect: boolean): void {
     if (isCorrect) {
@@ -73,6 +83,5 @@ export class PlayPageComponent implements OnInit {
       this.statisticsService.setStatistics(this.statistics);
       this.redirectService.redirect(`quiz-results`, this.statistics);
     }
-    console.log('🚧 corrAnswAmount:', this.corrAnswAmount);
   }
 }
