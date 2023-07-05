@@ -5,5 +5,4 @@ export interface IQuizResult {
   questionsAmount: number;
   corrAnswAmount: number;
   totalTime: number;
-  // navigationId: number;
 }

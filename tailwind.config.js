@@ -24,6 +24,9 @@ module.exports = {
         sans: ["Cabin", ...defaultTheme.fontFamily.sans],
       },
     },
+    backgroundImage: {
+      bgHeader: "url('/assets/images/background-header.svg')",
+    },
   },
   plugins: [],
 };

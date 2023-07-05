@@ -40,7 +40,6 @@ export class TaskComponent implements OnInit {
 
   //----------------------------------------------------------------
   handleClickAnswer(answer: string) {
-    console.log('🚧 CLICK!!!:');
     this.isAnswered = true;
     this.selectedAnswer = answer;
 

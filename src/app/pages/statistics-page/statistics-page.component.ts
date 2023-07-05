@@ -28,7 +28,6 @@ export class StatisticsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.statistics = this.statiscsService.getStatistics();
-    console.log('🚧 this.statistics:', this.statistics);
 
     if (this.statistics.length > 0) {
       this.statistics.forEach((result) => {

@@ -10,7 +10,5 @@ export class HeaderComponent implements OnInit {
     Statistics: 'statistics',
   });
 
-  ngOnInit(): void {
-    console.log('🚧 links:', this.links);
-  }
+  ngOnInit(): void {}
 }

@@ -31,16 +31,8 @@ export class PlayPageComponent implements OnInit {
     public errorService: ErrorService
   ) {}
   ngOnInit(): void {
-    // console.log('🚧 history.state:', history.state);
-    // this.quizIdList = history.state.quizzes;
     this.quizId = this.route.snapshot.paramMap.get('quizId');
     this.difficulty = this.route.snapshot.paramMap.get('difficulty');
-
-    // console.log('🚧 this.quizId:', this.quizId);
-    // console.log('🚧 this.difficulty:', this.difficulty);
-    // console.log('🚧 this.quizIdList:', this.quizIdList);
-    // console.log('🚧 this.difficulty:', this.difficulty);
-    // console.log('🚧 typeof this.quizId:', typeof this.quizId);
 
     if (!this.quizId || !this.difficulty) {
       this.redirectService.redirect('404');
@@ -53,13 +45,12 @@ export class PlayPageComponent implements OnInit {
       .subscribe((quiz) => {
         this.loading = false;
         this.tasks = quiz.results;
-        console.log('🚧 this.tasks!!!!:', this.tasks);
+
         if (this.tasks.length === 0) {
           this.redirectService.redirect('404');
           return;
         }
         this.quizName = this.tasks[0].category;
-        // console.log('🚧 this.tasks:', this.tasks[this.currentTaskIndex]);
       });
   }
   // ----------------------------------------------------------------

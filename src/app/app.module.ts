@@ -23,6 +23,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { DecimalPipe } from '@angular/common';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     ProgressBarComponent,
     PieChartComponent,
     SpinnerComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
