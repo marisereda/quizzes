@@ -1,5 +1,7 @@
 # Quizzes
 
+![quizzes](https://github.com/marisereda/quizzes/assets/105078220/3cca7672-7de1-4f8b-8b3f-49683cb78c78)
+
 ## Description
 
 The project "Quizzes" is a quiz app that provides 10 random quizzes. The user may make their own choices themselves or let the app make the choices instead.
