@@ -22,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { DecimalPipe } from '@angular/common';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DecimalPipe } from '@angular/common';
     FooterComponent,
     ProgressBarComponent,
     PieChartComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,9 +10,9 @@
           [routerLinkActiveOptions]="{ exact: true }"
           #rla="routerLinkActive"
           after=""
-          class="relative text-white after:absolute after:bottom-0 after:left-0 after:translate-y-2 after:duration-300"
+          class="relative text-white after:absolute after:bottom-0 after:left-0 after:translate-y-2 after:duration-300 hover:text-gray-100"
           [ngClass]="{
-            'after:right-0 after:h-1  after:rounded-full after:bg-white after:text-sm after:text-white after:transition':
+            'after:right-0 after:h-0.5  after:rounded-full after:bg-white after:text-sm after:text-white after:transition':
               rla.isActive,
 
           }"

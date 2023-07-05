@@ -5,7 +5,8 @@
     [currentDifficulty]="difficulty"
     (newBarEvent)="handleChangeDifficutly($event)"
   />
-  <p *ngIf="loading">Loading...</p>
+
+  <app-spinner *ngIf="loading" />
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
     <app-quiz-card
       *ngFor="let quizItem of quizzes; let i = index"

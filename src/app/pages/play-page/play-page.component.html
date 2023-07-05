@@ -1,7 +1,10 @@
 <div
   class="flex-col gap-10 overflow-hidden rounded-[20px] bg-neutral-50 shadow-lg"
 >
-  <p *ngIf="loading">Loading...</p>
+  <div *ngIf="loading" class="pt-10">
+    <app-spinner />
+  </div>
+
   <app-progress-bar
     [quizName]="quizName"
     [difficulty]="difficulty"
