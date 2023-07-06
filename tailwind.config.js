@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+var defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
@@ -21,11 +21,11 @@ module.exports = {
 
     extend: {
       fontFamily: {
-        sans: ["Cabin", ...defaultTheme.fontFamily.sans],
+        sans: ["Cabin"].concat(defaultTheme.fontFamily.sans),
       },
     },
     backgroundImage: {
-      bgHeader: "url('/assets/images/background-header.svg')",
+      header: "url('/assets/images/background-header.svg')",
     },
   },
   plugins: [],

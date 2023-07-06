@@ -7,23 +7,37 @@ import Chart from 'chart.js/auto';
 })
 export class PieChartComponent implements OnInit {
   public chart: Chart<'pie'>;
-  @Input() data: { [key: string]: number };
+  @Input() data: { label: string; value: number; color: string }[];
 
   ngOnInit(): void {
     this.createChart();
   }
 
   createChart() {
+    const { labels, data, backgroundColor } = this.data.reduce(
+      (acc, item) => {
+        acc.labels.push(item.label);
+        acc.data.push(item.value);
+        acc.backgroundColor.push(item.color);
+        return acc;
+      },
+      { labels: [], data: [], backgroundColor: [] } as {
+        labels: string[];
+        data: number[];
+        backgroundColor: string[];
+      }
+    );
+
     this.chart = new Chart('MyChart', {
       type: 'pie',
 
       data: {
-        labels: Object.keys(this.data),
+        labels,
         datasets: [
           {
             label: '',
-            data: Object.values(this.data),
-            backgroundColor: ['#22c55e', '#ef4444'],
+            data,
+            backgroundColor,
             hoverOffset: 4,
           },
         ],

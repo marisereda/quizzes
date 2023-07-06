@@ -1,46 +1,37 @@
 import {
   Component,
-  DoCheck,
   EventEmitter,
   Input,
-  OnInit,
+  OnChanges,
   Output,
 } from '@angular/core';
-import { ITask } from 'src/app/models/task';
+import { ITask } from 'src/app/models/quizzes';
 
-import { shuffle } from 'lodash';
+import shuffle from 'lodash.shuffle';
 import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
 })
-export class TaskComponent implements OnInit, DoCheck {
+export class TaskComponent implements OnChanges {
   @Input() task: ITask;
   @Output() newTaskEvent = new EventEmitter<boolean>();
-  prevTask: ITask;
   isAnswered = false;
   selectedAnswer = '';
-
   answers: string[] = [];
 
-  ngOnInit(): void {
-    this.prevTask = this.task;
+  //----------------------------------------------------------------
+  ngOnChanges(): void {
     this.createButtonList();
-  }
-
-  ngDoCheck() {
-    if (this.prevTask !== this.task) {
-      this.createButtonList();
-      this.prevTask = this.task;
-    }
   }
 
   //----------------------------------------------------------------
   createButtonList() {
-    this.answers = this.task.incorrect_answers;
-    this.answers.push(this.task.correct_answer);
-    this.answers = shuffle(this.answers);
+    this.answers = shuffle([
+      ...this.task.incorrect_answers,
+      this.task.correct_answer,
+    ]);
   }
 
   //----------------------------------------------------------------

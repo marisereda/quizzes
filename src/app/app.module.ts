@@ -25,6 +25,7 @@ import { DecimalPipe } from '@angular/common';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { DecodePipe } from './pipes/decode.pipe';
+import { FormatTimePipe } from './pipes/format-time.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DecodePipe } from './pipes/decode.pipe';
     SpinnerComponent,
     LogoComponent,
     DecodePipe,
+    FormatTimePipe,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { DecodePipe } from './pipes/decode.pipe';
     FontAwesomeModule,
     RouterModule,
   ],
-  providers: [DecimalPipe],
+  providers: [DecimalPipe, FormatTimePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

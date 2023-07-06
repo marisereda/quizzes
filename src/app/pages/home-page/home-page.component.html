@@ -11,7 +11,7 @@
     <app-quiz-card
       *ngFor="let quizItem of quizzes; let i = index"
       [quizItem]="quizItem"
-      [color]="getColor(i)"
+      [color]="getCardColor(i)"
       (newCardEvent)="handlePlayClick($event)"
     />
   </div>

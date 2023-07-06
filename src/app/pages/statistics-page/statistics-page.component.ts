@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IQuizResult } from 'src/app/models/quiz-result';
-import { FormatTimeService } from 'src/app/services/format-time.service';
+import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
+import { Constants } from 'src/app/constants/constants';
+import { IStatistics } from 'src/app/models/quizzes';
+import { FormatTimePipe } from 'src/app/pipes/format-time.pipe';
 import { StatisticsService } from 'src/app/services/statistics.service';
 
 @Component({
@@ -8,41 +10,39 @@ import { StatisticsService } from 'src/app/services/statistics.service';
   templateUrl: './statistics-page.component.html',
 })
 export class StatisticsPageComponent implements OnInit {
-  statistics: IQuizResult[];
+  statistics: IStatistics;
   totalTime = 0;
-  showData = {
-    'Quizzes:': 0,
-    'Average time:': '',
-    'Questions:': 0,
-  };
-  renderData: [string, string | number][];
-  chartData = {
-    'Correct Answers': 0,
-    'Incorrect Answers': 0,
-  };
+  showData: { name: string; value: string | number }[];
+  chartData: PieChartComponent['data'];
 
   constructor(
     private statiscsService: StatisticsService,
-    private formatService: FormatTimeService
+    private formatTime: FormatTimePipe
   ) {}
 
   ngOnInit(): void {
     this.statistics = this.statiscsService.getStatistics();
 
-    if (this.statistics.length > 0) {
-      this.statistics.forEach((result) => {
-        this.totalTime += result.totalTime;
-        this.showData['Quizzes:'] += 1;
-        this.showData['Questions:'] += result.questionsAmount;
-        this.showData['Average time:'] = this.formatService.formatTime(
-          this.totalTime / this.showData['Quizzes:']
-        );
-        this.chartData['Correct Answers'] += result.corrAnswAmount;
-      });
-      this.chartData['Incorrect Answers'] =
-        this.showData['Questions:'] - this.chartData['Correct Answers'];
-    }
+    this.showData = [
+      { name: 'Quizzes:', value: this.statistics.totalQuizzes },
+      {
+        name: 'Average time:',
+        value: this.formatTime.transform(this.statistics.avgTime),
+      },
+      { name: 'Questions:', value: this.statistics.totalQuestions },
+    ];
 
-    this.renderData = Object.entries(this.showData);
+    this.chartData = [
+      {
+        label: 'Correct Answers',
+        value: this.statistics.correctAnswers,
+        color: Constants.chartCorrColor,
+      },
+      {
+        label: 'Incorrect Answers',
+        value: this.statistics.incorrectAnswers,
+        color: Constants.chartIncorrColor,
+      },
+    ];
   }
 }

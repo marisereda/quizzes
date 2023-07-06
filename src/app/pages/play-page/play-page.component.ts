@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IQuizResult } from 'src/app/models/quiz-result';
-import { ITask } from 'src/app/models/task';
+import { IQuizResult, ITask } from 'src/app/models/quizzes';
 import { ErrorService } from 'src/app/services/error.service';
 import { QuizzesService } from 'src/app/services/quizzes.service';
 import { RedirectService } from 'src/app/services/redirect.service';
@@ -13,18 +12,13 @@ import { StatisticsService } from 'src/app/services/statistics.service';
   templateUrl: './play-page.component.html',
 })
 export class PlayPageComponent implements OnInit, OnDestroy {
-  quizzesSubscription: Subscription;
-  quizIdList: string[];
-  quizId: string | null;
-  quizName: string;
-  difficulty: string | null;
   tasks: ITask[] = [];
   currentTaskIndex = 0;
-  corrAnswAmount = 0;
   timeStart: number = Date.now();
-  statistics: IQuizResult;
+  quizResult: IQuizResult;
   loading = true;
-  notFound = false;
+  quizzesSubscription: Subscription;
+
   constructor(
     private quizzesService: QuizzesService,
     private route: ActivatedRoute,
@@ -35,26 +29,32 @@ export class PlayPageComponent implements OnInit, OnDestroy {
 
   // ----------------------------------------------------------------
   ngOnInit(): void {
-    this.quizId = this.route.snapshot.paramMap.get('quizId');
-    this.difficulty = this.route.snapshot.paramMap.get('difficulty');
+    const quizId = this.route.snapshot.paramMap.get('quizId');
+    const difficulty = this.route.snapshot.paramMap.get('difficulty');
 
-    if (!this.quizId || !this.difficulty) {
-      this.redirectService.redirect('404');
-      this.loading = false;
-      return;
+    if (!quizId || !difficulty) {
+      return this.redirectService.redirect('404');
     }
 
+    this.quizResult = {
+      quizId,
+      quizName: '',
+      difficulty,
+      questionsAmount: 0,
+      corrAnswAmount: 0,
+      totalTime: 0,
+    };
+
     this.quizzesSubscription = this.quizzesService
-      .getTasks(this.quizId, this.difficulty)
+      .getTasks(quizId, difficulty)
       .subscribe((tasks) => {
+        if (tasks.length === 0) {
+          return this.redirectService.redirect('404');
+        }
         this.loading = false;
         this.tasks = tasks;
-
-        if (this.tasks.length === 0) {
-          this.redirectService.redirect('404');
-          return;
-        }
-        this.quizName = this.tasks[0].category;
+        this.quizResult.quizName = tasks[0].category;
+        this.quizResult.questionsAmount = tasks.length;
       });
   }
 
@@ -66,22 +66,15 @@ export class PlayPageComponent implements OnInit, OnDestroy {
   // ----------------------------------------------------------------
   handleClickAnswer(isCorrect: boolean): void {
     if (isCorrect) {
-      this.corrAnswAmount += 1;
+      this.quizResult.corrAnswAmount += 1;
     }
     if (this.currentTaskIndex < this.tasks.length - 1) {
       this.currentTaskIndex += 1;
-    } else {
-      this.statistics = {
-        quizId: this.quizId,
-        quizName: this.quizName,
-        difficulty: this.difficulty,
-        questionsAmount: this.currentTaskIndex + 1,
-        corrAnswAmount: this.corrAnswAmount,
-        totalTime: Date.now() - this.timeStart,
-      };
-
-      this.statisticsService.setStatistics(this.statistics);
-      this.redirectService.redirect(`quiz-results`, this.statistics);
+      return;
     }
+
+    this.quizResult.totalTime = Date.now() - this.timeStart;
+    this.statisticsService.saveResult(this.quizResult);
+    this.redirectService.redirect(`quiz-results`, this.quizResult);
   }
 }

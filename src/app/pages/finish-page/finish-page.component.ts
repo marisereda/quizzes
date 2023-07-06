@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IQuizResult } from 'src/app/models/quiz-result';
-import { FormatTimeService } from 'src/app/services/format-time.service';
+import { IQuizResult } from 'src/app/models/quizzes';
+import { FormatTimePipe } from 'src/app/pipes/format-time.pipe';
 import { RedirectService } from 'src/app/services/redirect.service';
 
 @Component({
@@ -9,44 +9,33 @@ import { RedirectService } from 'src/app/services/redirect.service';
   templateUrl: './finish-page.component.html',
 })
 export class FinishPageComponent implements OnInit {
-  data: IQuizResult;
-  resultsList = {
-    'Category:': '',
-    'Difficulty:': '',
-    'Score:': '',
-    'Questions:': '',
-    'Correct answers:': '',
-    'Incorrect answers:': '',
-    'Total time:': '',
-  };
   titlesList: string[];
   valuesList: string[];
 
   constructor(
     public router: Router,
     private redirectService: RedirectService,
-    private formatService: FormatTimeService
+    private formatTime: FormatTimePipe
   ) {}
 
   ngOnInit(): void {
-    if (!history.state.hasOwnProperty('quizName')) {
+    const data: IQuizResult = history.state;
+    if (!history.state.quizName) {
       this.redirectService.redirect('');
     }
-    this.data = history.state;
-    this.resultsList = {
-      'Category:': this.data.quizName,
-      'Difficulty:': this.data.difficulty ?? '',
-      'Score:': `${
-        (this.data.corrAnswAmount / this.data.questionsAmount) * 100
-      }%`,
-      'Questions:': this.data.questionsAmount.toString(),
-      'Correct answers:': this.data.corrAnswAmount.toString(),
+
+    const resultsList = {
+      'Category:': data.quizName,
+      'Difficulty:': data.difficulty ?? '',
+      'Score:': `${(data.corrAnswAmount / data.questionsAmount) * 100}%`,
+      'Questions:': data.questionsAmount.toString(),
+      'Correct answers:': data.corrAnswAmount.toString(),
       'Incorrect answers:': (
-        this.data.questionsAmount - this.data.corrAnswAmount
+        data.questionsAmount - data.corrAnswAmount
       ).toString(),
-      'Total time:': this.formatService.formatTime(this.data.totalTime),
+      'Total time:': this.formatTime.transform(data.totalTime),
     };
-    this.titlesList = Object.keys(this.resultsList);
-    this.valuesList = Object.values(this.resultsList);
+    this.titlesList = Object.keys(resultsList);
+    this.valuesList = Object.values(resultsList);
   }
 }

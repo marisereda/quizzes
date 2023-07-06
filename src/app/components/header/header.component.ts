@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
-  links = Object.entries({
-    Home: '',
-    Statistics: 'statistics',
-  });
-
-  ngOnInit(): void {}
+export class HeaderComponent {
+  links = [
+    {
+      label: 'Home',
+      href: '',
+    },
+    {
+      label: 'Statistics',
+      href: 'statistics',
+    },
+  ];
 }

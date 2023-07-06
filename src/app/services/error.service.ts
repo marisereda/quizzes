@@ -7,8 +7,6 @@ import { Subject } from 'rxjs';
 export class ErrorService {
   error$ = new Subject();
 
-  constructor() {}
-
   handle(message: string) {
     this.error$.next(message);
   }

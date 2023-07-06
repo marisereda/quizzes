@@ -1,12 +1,12 @@
 <header
-  class="relative min-h-[300px] bg-bgHeader pb-10 pt-10 md:min-h-[400px] md:pt-14"
+  class="relative min-h-[300px] bg-header pb-10 pt-10 md:min-h-[400px] md:pt-14"
 >
   <nav class="container flex items-center text-lg font-bold md:text-2xl">
     <app-logo />
-    <ul class="flex grow justify-center gap-16 pr-[54px]">
+    <ul class="flex grow justify-center gap-8 pr-[54px] md:gap-16">
       <li *ngFor="let link of links">
         <a
-          [routerLink]="link[1]"
+          [routerLink]="link.href"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           #rla="routerLinkActive"
@@ -17,7 +17,7 @@
               rla.isActive,
 
           }"
-          >{{ link[0] }}</a
+          >{{ link.label }}</a
         >
       </li>
     </ul>

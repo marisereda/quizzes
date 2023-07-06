@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { QuizCardComponent } from 'src/app/components/quiz-card/quiz-card.component';
 import { IQuizItem } from 'src/app/models/quizzes';
 import { ErrorService } from 'src/app/services/error.service';
 import { QuizzesService } from 'src/app/services/quizzes.service';
@@ -46,10 +47,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   // ----------------------------------------------------------------
-  getColor(index: number) {
-    return ['yellow', 'darkBlue', 'blue'][index % 3] as
-      | 'darkBlue'
-      | 'blue'
-      | 'yellow';
+  getCardColor(index: number) {
+    const colors: QuizCardComponent['color'][] = ['yellow', 'darkBlue', 'blue'];
+    return colors[index % colors.length];
   }
 }

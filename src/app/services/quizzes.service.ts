@@ -6,11 +6,9 @@ import {
 import { Injectable } from '@angular/core';
 import { ErrorService } from './error.service';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { IQuizItem, IQuizzesList } from '../models/quizzes';
-import { shuffle } from 'lodash';
-import { IQuiz } from '../models/quiz';
+import { IQuizItem, IQuizzesList, IQuiz, ITask} from '../models/quizzes';
+import shuffle from 'lodash.shuffle';
 import { Constants } from '../constants/constants';
-import { ITask } from '../models/task';
 
 @Injectable({
   providedIn: 'root',
